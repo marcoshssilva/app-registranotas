@@ -2,6 +2,13 @@
 App feito com [react-native](https://reactnative.dev/) para 
 projeto de matéria Programação para Dispositivos Móveis em Android.
 
+## Compilando projeto
+
+Se você rodar compilar este projeto e executa-lo manualmente pelo seu IDE.
+Será necessário copiar e colar o seu `google-services.json` em `android/app/google-services.json`
+
+Caso contrário, **[Firebase](https://firebase.google.com/?hl=pt)** não deve funcionar.
+
 ## Rodar com Android
 Execute uma instancia VM de Android sobre o [Android Studio](https://developer.android.com/studio) ou conecte seu smartphone Android em seu computador.
 
