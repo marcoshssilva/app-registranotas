@@ -6,14 +6,14 @@ import {
     Text
 } from "react-native";
 
-const Authpage = ({navigator, route}) => {
+const Homepage = ({navigation, route}) => {
     return (
         <SafeAreaView style={Styles.root}>
             <Text style={Styles.title}>
-                Login Page.
+                Welcome to this page
             </Text>
         </SafeAreaView>
     )
 }
 
-export default Authpage;
+export default Homepage;
