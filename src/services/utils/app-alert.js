@@ -2,9 +2,9 @@ import { Alert } from "react-native";
 
 
 /**
- * @param {*} title -> String
- * @param {*} message -> String
- * @param {*} callback -> Function
+ * @param {String} title
+ * @param {String} message
+ * @param {Function} callback
  */
 export function showWithConfirmationOnly(title, message, callback) {
     let buttonOk = {
@@ -16,10 +16,10 @@ export function showWithConfirmationOnly(title, message, callback) {
 }
 
 /**
- * @param {*} title -> String
- * @param {*} message -> String
- * @param {*} onConfirm -> Function
- * @param {*} onCancel -> Function
+ * @param {String}  title
+ * @param {String} message
+ * @param {Function} onConfirm
+ * @param {Function} onCancel
  */
 export function showWithOkCancelButton(title, message, onConfirm, onCancel) {
     let buttonOk = {
