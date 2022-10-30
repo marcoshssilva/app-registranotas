@@ -4,7 +4,9 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack'
 import auth from '@react-native-firebase/auth';
 
 import Homepage from "../pages/homepage";
-import Authpage from "../pages/auth";
+import LoginPage from "../pages/login";
+import RegisterPage from "../pages/register";
+import ForgotPasswordPage from "../pages/forgot-password";
 
 const Stack = createNativeStackNavigator();
 
@@ -27,8 +29,10 @@ const RootNavigator = () => {
     if (!user) {
         return (
             <NavigationContainer>
-                <Stack.Navigator screenOptions={{ headerShown: false }}>
-                    <Stack.Screen name="Auth" component={Authpage} />
+                <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
+                    <Stack.Screen name="Login" component={LoginPage} />
+                    <Stack.Screen name="Register" component={RegisterPage} />
+                    <Stack.Screen name="Forgot" component={ForgotPasswordPage} />
                 </Stack.Navigator>
             </NavigationContainer>
         )

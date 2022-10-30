@@ -21,7 +21,7 @@ npm start
 npm run android
 ```
 
-## Rodar com iOS
+## Rodar com iOS **(NÃO TESTADO)**
 Abra seu [XCode](https://developer.apple.com/xcode/) e 
 execute uma instancia iOS em sua máquina.
 
