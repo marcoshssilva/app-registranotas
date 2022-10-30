@@ -1,40 +1,83 @@
 import React from 'react';
 import { Avatar, Text, TextInput, Button } from 'react-native-paper';
-import Styles from "./style";
+import { Styles } from "./style";
+import auth from '@react-native-firebase/auth';
+import {showWithConfirmationOnly} from "../../services/utils/app-alert";
 
 import {
-    ScrollView,
+    SafeAreaView,
     TouchableOpacity,
     View
 } from "react-native";
 
 const RegisterPage = ({ navigation, route }) => {
-    const [name, setName] = React.useState("");
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [passwordConfirmation, setPasswordConfirmation] = React.useState("");
-    const onClickLoginButton = () => navigation.navigate("Login")
+
+    const onClickLoginButton = () => {
+        navigation.navigate("Login")
+    }
+
+    const onCLickRegisterButton = () => {
+        if (password !== passwordConfirmation) showWithConfirmationOnly("Erro", "Sua senha e confirmação não conferem.", () => {})
+        auth().createUserWithEmailAndPassword(email, password)
+            .catch((reason) => {
+                showWithConfirmationOnly("Não foi possível continuar", "Já existe um usuário com este e-mail e/ou senha fraca.", () => {})
+            })
+    }
+
+    const checkFieldsAreOk = () => {
+        let regexEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        let regexPassword = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/
+
+        if (email.length < 6 || !email.match(regexEmail)) return false
+        if (password.length < 6 || !password.match(regexPassword)) return false;
+        return password === passwordConfirmation;
+    }
 
     return (
-        <ScrollView>
-            <View style={{ ...Styles.container }}>
+        <SafeAreaView>
+            <View style={{ ...Styles.containerCentered }}>
                 <Avatar.Icon icon="folder" size={92} style={{ ...Styles.headerLogo }} />
 
-                <Text variant="displaySmall" style={{ ...Styles.headerTitle, ...Styles.boxField }}>
-                    Criar uma conta
+                <Text variant="headlineLarge" style={{ ...Styles.headerTitle, ...Styles.boxField }}>
+                    Registre-se com seu email:
                 </Text>
 
-                <TextInput returnKeyType="next" label="Seu nome:" style={{ ...Styles.boxField }} onChangeText={text => setName(text)} />
+                <TextInput 
+                    returnKeyType="next" 
+                    label="Seu e-mail:" 
+                    style={{ ...Styles.boxField }} 
+                    onChangeText={text => setEmail(text)}
+                    />
 
-                <TextInput returnKeyType="next" label="Seu e-mail:" style={{ ...Styles.boxField }} onChangeText={text => setEmail(text)}/>
+                <TextInput 
+                    returnKeyType="next" 
+                    label="Sua senha:" 
+                    style={{ ...Styles.boxField }} 
+                    onChangeText={text => setPassword(text)}
+                    secureTextEntry
+                    />
 
-                <TextInput returnKeyType="next" label="Sua senha:" style={{ ...Styles.boxField }} onChangeText={text => setPassword(text)}/>
+                <TextInput 
+                    returnKeyType="next" 
+                    label="Confirme sua senha:" 
+                    style={{ ...Styles.boxField }} 
+                    onChangeText={text => setPasswordConfirmation(text)}
+                    secureTextEntry
+                    />
 
-                <TextInput returnKeyType="next" label="Confirme sua senha:" style={{ ...Styles.boxField }} onChangeText={text => setPasswordConfirmation(text)}/>
+                <Button 
+                    mode="contained" 
+                    style={{ ...Styles.boxField }} 
+                    onPress={onCLickRegisterButton} 
+                    disabled={!checkFieldsAreOk()}
+                    >
+                        Cadastrar-se
+                </Button>
 
-                <Button mode="contained" style={{ ...Styles.boxField }}>Cadastrar-se</Button>
-
-                <View style={{ ...Styles.boxField, ...Styles.registrationField }}>
+                <View style={{ ...Styles.boxField, ...Styles.rowItensField }}>
                     <Text >
                         Já possui uma conta? {" "}
                     </Text>
@@ -45,7 +88,7 @@ const RegisterPage = ({ navigation, route }) => {
                     </TouchableOpacity>
                 </View>
             </View>
-        </ScrollView>
+        </SafeAreaView>
     )
 }
 
