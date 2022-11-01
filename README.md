@@ -9,7 +9,9 @@ Será necessário copiar e colar o seu `google-services.json` em `android/app/go
 
 Caso contrário, **[Firebase](https://firebase.google.com/?hl=pt)** não deve funcionar.
 
-Para compilar uma **Release** utilize como referência:
+Para compilar uma **Release** será necessário que utilize uma chave RSA criptografada. 
+
+Use como referência:
 
 https://instamobile.io/android-development/generate-react-native-release-build-android/
 
