@@ -10,7 +10,10 @@ Será necessário copiar e colar o seu `google-services.json` em `android/app/go
 Caso contrário, **[Firebase](https://firebase.google.com/?hl=pt)** não deve funcionar.
 
 Para compilar uma **Release** utilize como referência:
+
 https://instamobile.io/android-development/generate-react-native-release-build-android/
+
+https://github.com/marcoshssilva/marcoshssilva/tree/main/generate-certitify-with-keytool
 
 ## Rodar com Android
 Execute uma instancia VM de Android sobre o [Android Studio](https://developer.android.com/studio) ou conecte seu smartphone Android em seu computador.
