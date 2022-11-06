@@ -86,8 +86,10 @@ react-native bundle --platform android --dev false \
   --assets-dest android/app/build/intermediates/res/merged/release/
 
 cd android
+
 # clean packages
 ./gradlew clean
+
 # re-build and generate APK
 ./gradlew assembleRelease
 ```
