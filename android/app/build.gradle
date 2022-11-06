@@ -219,9 +219,9 @@ android {
         }
         release {
             storeFile file('release.keystore')
-            storePassword 'ReleaseApp2022'
-            keyAlias 'registraNotas-1.0'
-            keyPassword 'releaseKey-1.0'
+            storePassword ''
+            keyAlias ''
+            keyPassword ''
         }
     }
     buildTypes {
