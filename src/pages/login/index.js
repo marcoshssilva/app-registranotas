@@ -47,7 +47,7 @@ const LoginPage = ({ navigation, route }) => {
         // Check if your device supports Google Play
         await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
         // Get the users ID token
-        const { idToken } = await GoogleSignin.signIn().catch((reason) => AppAlert.showWithConfirmationOnly("Não foi possivel completar a operação.", "Ocorreu um erro ao processar está solicitação. Procure o suporte do aplicativo em caso de problemas.", () => {}))
+        const { idToken } = await GoogleSignin.signIn().catch((reason) => AppAlert.showWithConfirmationOnly(AppMessages.CANNOT_PROCEED, AppMessages.CANNOT_PROCEED_DESCRIBE, () => {}))
         if (idToken == null || idToken == undefined) return;
 
         // Create a Google credential with the token
@@ -56,8 +56,6 @@ const LoginPage = ({ navigation, route }) => {
         // Sign-in the user with the credential
         return auth().signInWithCredential(googleCredential)
     }
-
-    const onContinueWithFacebook = () => AppAlert.showWithConfirmationOnly(AppMessages.NOT_WORK_YET, AppMessages.NOT_WORK_YET_DESCRIBE, voidFunction)
 
     return (
         <SafeAreaView>
@@ -90,10 +88,6 @@ const LoginPage = ({ navigation, route }) => {
 
                 <Button mode='outlined' style={{ ...Styles.boxField }} onPress={onContinueWithGoogle} icon={"google"}>
                     Continuar com Google
-                </Button>
-
-                <Button mode='outlined' style={{ ...Styles.boxField }} onPress={onContinueWithFacebook} icon={"facebook"} disabled={true}>
-                    Continuar com Facebook
                 </Button>
 
                 <View style={{ ...Styles.boxField, ...Styles.rowItensField }}>
