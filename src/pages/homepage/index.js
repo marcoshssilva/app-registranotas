@@ -1,5 +1,8 @@
 import React from 'react';
-import Styles from "./style";
+import {Styles} from "./style";
+
+import auth from "@react-native-firebase/auth";
+import {createDocumentData, getDocumentData} from "../../services/firestore/document-data";
 
 import {
     SafeAreaView,
@@ -7,6 +10,7 @@ import {
 } from "react-native";
 
 const Homepage = ({navigation, route}) => {
+    getDocumentData(auth().currentUser.email).then((onComplete) => { if (!onComplete.exists) createDocumentData(auth().currentUser.email);})
     return (
         <SafeAreaView>
             <Text>
