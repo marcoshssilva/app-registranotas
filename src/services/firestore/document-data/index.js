@@ -3,14 +3,14 @@ import firestore from '@react-native-firebase/firestore';
 /**
  * @type {string} Refered collection to users in Firebase Firestore
  */
-export const USERS_COLLECTION = 'users';
+export const DOCUMENTDATA_COLLECTION = 'users_notes';
 
 /**
  * @param userEmail -> email from auth user
  * @returns {FirebaseFirestoreTypes.DocumentReference<FirebaseFirestoreTypes.DocumentData>}
  */
 export const getDocumentData = (userEmail) => {
-    return firestore().collection(USERS_COLLECTION)
+    return firestore().collection(DOCUMENTDATA_COLLECTION)
         .doc(userEmail)
         .get()
 }
@@ -20,11 +20,14 @@ export const getDocumentData = (userEmail) => {
  * @returns {Promise<void>}
  */
 export const createDocumentData = (userEmail) => {
-    return firestore().collection(USERS_COLLECTION)
+    return firestore().collection(DOCUMENTDATA_COLLECTION)
         .doc(userEmail)
         .set({
             data: {
-                folders: []
+                favoritesIds: [],
+                folders: [],
+                fixedIds: [],
+                notes: []
             },
             createdAt: firestore.FieldValue.serverTimestamp(),
         })

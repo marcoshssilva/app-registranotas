@@ -1,12 +1,13 @@
 import React from "react";
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack'
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import auth from '@react-native-firebase/auth';
 
 import Homepage from "../pages/homepage";
 import LoginPage from "../pages/login";
 import RegisterPage from "../pages/register";
 import ForgotPasswordPage from "../pages/forgot-password";
+import { ToolbarMenuRight } from "../components/toolbar-menu-right";
 
 const Stack = createNativeStackNavigator();
 
@@ -41,7 +42,10 @@ const RootNavigator = () => {
     return (
         <NavigationContainer>
             <Stack.Navigator initialRouteName="Home">
-                <Stack.Screen name="Home" component={Homepage}/>
+                <Stack.Screen name="Home" component={Homepage} options={{
+                    headerTitle: 'RegistraNotas',
+                    headerRight: () => <ToolbarMenuRight />
+                }} />
             </Stack.Navigator>
         </NavigationContainer>
     )
