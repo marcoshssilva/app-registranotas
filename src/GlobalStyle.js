@@ -36,5 +36,11 @@ export const GlobalStyles = StyleSheet.create({
     textEmphasis: {
         fontWeight: 'bold',
         color: theme.colors.primary
+    },
+    modalDefault: {
+        backgroundColor: theme.colors.background,
+        padding: 20,
+        margin: 20,
+        borderRadius: 32
     }
 });
