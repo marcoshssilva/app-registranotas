@@ -1,7 +1,8 @@
-import React from "react";
+import React, {Component} from "react";
 import {SafeAreaView, StyleSheet} from "react-native";
 import { Modal, Portal, Text } from 'react-native-paper';
 import {GlobalStyles} from "../../GlobalStyle";
+import { EventRegister } from 'react-native-event-listeners'
 
 const CreateFolderIntern = () => {
     return <SafeAreaView>
@@ -9,16 +10,33 @@ const CreateFolderIntern = () => {
     </SafeAreaView>
 }
 
-export const ModalCreateFolder = () => {
-    const [visible, setVisible] = React.useState(false);
+export class ModalCreateFolder extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { visible: false }
+    }
 
-    const hideModal = () => setVisible(false);
+    componentDidMount() {
+        this.listener = EventRegister.addEventListener('onMustShowModelCreateFolder', (mustShow) => {
+            this.setState({ visible: mustShow })
+        })
+    }
 
-    return <Portal>
-        <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={ModalCreateFolderStyles.modalDefault}>
-            <CreateFolderIntern />
-        </Modal>
-    </Portal>
+    componentWillUnmount() {
+        EventRegister.removeEventListener(this.listener)
+    }
+
+    render() {
+        return <Portal>
+            <Modal visible={this.state.visible} onDismiss={() => this.setState({visible: false})} contentContainerStyle={ModalCreateFolderStyles.modalDefault}>
+                <CreateFolderIntern />
+            </Modal>
+        </Portal>
+    }
+}
+
+export function showModalCreateFolder() {
+    EventRegister.emit("onMustShowModelCreateFolder", true)
 }
 
 export const ModalCreateFolderStyles = StyleSheet.create({

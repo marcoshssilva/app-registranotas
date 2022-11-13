@@ -3,8 +3,20 @@ import { StyleSheet, SafeAreaView } from "react-native";
 import { Text, List, Divider  } from "react-native-paper"
 
 import { GlobalStyles } from "../../GlobalStyle";
+import {showModalCreateFolder} from "../modal-create-folder";
+import {showModalCreateNotes} from "../modal-create-notes";
 
 export const ToolbarDrawableMenu = ({ navigation, route, options }) => {
+    const openCreateQuickNoteModal = () => {
+        showModalCreateNotes()
+        navigation.closeDrawer();
+    }
+
+    const openCreateFolderModal = () => {
+        showModalCreateFolder()
+        navigation.closeDrawer();
+    }
+
     return (<SafeAreaView>
         <Text
             variant="headlineMedium"
@@ -50,12 +62,14 @@ export const ToolbarDrawableMenu = ({ navigation, route, options }) => {
             title="Criar pasta"
             description="Adiciona uma nova pasta personalizada"
             left={props => <List.Icon {...props} icon="folder-plus-outline" />}
+            onPress={openCreateFolderModal}
         />
 
         <List.Item
             title="Nota rápida"
             description="Cria uma nota simplificada"
             left={props => <List.Icon {...props} icon="notebook-plus" />}
+            onPress={openCreateQuickNoteModal}
         />
     </SafeAreaView>)
 }

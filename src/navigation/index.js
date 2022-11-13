@@ -8,6 +8,7 @@ import LoginPage from "../pages/login";
 import RegisterPage from "../pages/register";
 import ForgotPasswordPage from "../pages/forgot-password";
 import { ToolbarMenuRight } from "../components/toolbar-menu-right";
+import {showModalSettingsConfig} from "../components/modal-settings-config";
 
 const Stack = createNativeStackNavigator();
 
@@ -44,7 +45,7 @@ const RootNavigator = () => {
             <Stack.Navigator initialRouteName="Home">
                 <Stack.Screen name="Home" component={Homepage} options={{
                     headerTitle: 'RegistraNotas',
-                    headerRight: () => <ToolbarMenuRight icon={'cog'} onPress={() => console.log('OK')}/>
+                    headerRight: () => <ToolbarMenuRight icon={'cog'} onPress={() => showModalSettingsConfig()}/>
                 }} />
             </Stack.Navigator>
         </NavigationContainer>

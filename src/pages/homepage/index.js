@@ -11,6 +11,8 @@ import {FavoriteNotesScreen} from "./screens/FavoriteNotesScreen";
 import {FilteredFolderNotesScreen} from "./screens/FilteredFolderNotesScreen";
 import {ToolbarMenuRight, ToolbarMenuRightStyle} from "../../components/toolbar-menu-right";
 import {GlobalStyles} from "../../GlobalStyle";
+import {showModalCreateFolder} from "../../components/modal-create-folder";
+import {showModalCreateNotes} from "../../components/modal-create-notes";
 
 const Drawer = createDrawerNavigator();
 
@@ -24,15 +26,15 @@ const Homepage = ({navigation, route}) => {
                 component={PrincipalPanelScreen}
                 options={{
                     title: 'Painel Principal',
-                    headerRight: (props) => <View style={GlobalStyles.rowItensField}>
+                    headerRight: (props) => <View style={GlobalStyles.rowItensField} {...props}>
                         <ToolbarMenuRight
                             icon={'notebook-plus'}
-                            onPress={() => console.log('123')} />
+                            onPress={() => showModalCreateNotes()} />
 
                         <ToolbarMenuRight
                             style={ToolbarMenuRightStyle.marginAlignTopToolbar}
                             icon={'folder-plus-outline'}
-                            onPress={() => console.log('123')} />
+                            onPress={() => showModalCreateFolder()} />
                     </View>
                 }}
                 />
