@@ -44,7 +44,7 @@ const RootNavigator = () => {
             <Stack.Navigator initialRouteName="Home">
                 <Stack.Screen name="Home" component={Homepage} options={{
                     headerTitle: 'RegistraNotas',
-                    headerRight: () => <ToolbarMenuRight />
+                    headerRight: () => <ToolbarMenuRight icon={'cog'} onPress={() => console.log('OK')}/>
                 }} />
             </Stack.Navigator>
         </NavigationContainer>
