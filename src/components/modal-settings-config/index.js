@@ -1,13 +1,39 @@
 import React, {Component} from "react";
 import {SafeAreaView, StyleSheet} from "react-native";
-import { Modal, Portal, Text } from 'react-native-paper';
+import {Avatar, Button, Divider, Modal, Portal, Text} from 'react-native-paper';
 import {GlobalStyles} from "../../GlobalStyle";
 import {EventRegister} from "react-native-event-listeners";
-import {ModalCreateFolderStyles} from "../modal-create-folder";
+import auth from "@react-native-firebase/auth";
+import * as AppMessages from "../../services/utils/app-default-messages";
+import * as AppAlerts from "../../services/utils/app-alert";
+import {signInUserSystem} from "../../services/firestore/document-data";
 
 const SettingsConfigIntern = () => {
+    const logout = () => {
+        AppAlerts.showWithOkCancelButton(
+            AppMessages.ASK_LOGOUT_USER,
+            AppMessages.ASK_LOGOUT_USER_DESCRIBE,
+            () => {
+                signInUserSystem().then(() => {}, () => {}, () => EventRegister.emit("onMustShowModelSettingsConfig", false))
+            },
+            () => {})
+    }
+
     return <SafeAreaView>
-        <Text>Example Modal.  Click outside this area to dismiss.</Text>
+
+        <Avatar.Icon size={72} icon={"account"} style={{...ModalSettingsConfigStyles.avatarIcon}} />
+
+        <Text
+            style={{...ModalSettingsConfigStyles.avatarEmail}}>
+            { auth().currentUser.email }
+        </Text>
+
+        <Divider style={{marginVertical: 16}} />
+
+        <Button onPress={logout}>
+            Sair do Usuário
+        </Button>
+
     </SafeAreaView>
 }
 
@@ -29,7 +55,7 @@ export class ModalSettingsConfig extends Component {
 
     render() {
         return <Portal>
-            <Modal visible={this.state.visible} onDismiss={() => this.setState({visible: false})} contentContainerStyle={ModalCreateFolderStyles.modalDefault}>
+            <Modal visible={this.state.visible} onDismiss={() => this.setState({visible: false})} contentContainerStyle={ModalSettingsConfigStyles.modalDefault}>
                 <SettingsConfigIntern />
             </Modal>
         </Portal>
@@ -42,4 +68,12 @@ export function showModalSettingsConfig() {
 
 export const ModalSettingsConfigStyles = StyleSheet.create({
     ...GlobalStyles,
+    avatarIcon: {
+        alignSelf: 'center',
+        marginBottom: 16,
+    },
+    avatarEmail: {
+        textAlign: 'center',
+        fontWeight: '800'
+    }
 })
