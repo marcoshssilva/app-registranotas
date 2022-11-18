@@ -1,5 +1,5 @@
 import React from "react";
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, createNavigationContainerRef } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import auth from '@react-native-firebase/auth';
 
@@ -9,10 +9,20 @@ import RegisterPage from "../pages/register";
 import ForgotPasswordPage from "../pages/forgot-password";
 import { ToolbarMenuRight } from "../components/toolbar-menu-right";
 import {showModalSettingsConfig} from "../components/modal-settings-config";
+import { ViewNotePage } from "../pages/view-note";
+import { showModalEditNotes } from "../components/modal-edit-notes";
 
-const Stack = createNativeStackNavigator();
+export const navigationRef = createNavigationContainerRef();
 
-const RootNavigator = () => {
+export const Stack = createNativeStackNavigator();
+
+export function navigate(name, params) {
+    if (navigationRef.isReady()) {
+      navigationRef.navigate(name, params);
+    }
+}
+
+export default RootNavigator = () => {
     const [initializing, setInitializing] = React.useState(true);
     const [user, setUser] = React.useState();
 
@@ -41,15 +51,30 @@ const RootNavigator = () => {
     }
 
     return (
-        <NavigationContainer>
+        <NavigationContainer ref={navigationRef}>
             <Stack.Navigator initialRouteName="Home">
-                <Stack.Screen name="Home" component={Homepage} options={{
-                    headerTitle: 'RegistraNotas',
-                    headerRight: () => <ToolbarMenuRight icon={'cog'} onPress={() => showModalSettingsConfig()}/>
-                }} />
+
+                <Stack.Screen 
+                    name="Home" 
+                    component={Homepage} 
+                    options={{
+                        headerTitle: 'RegistraNotas',
+                        headerRight: () => <ToolbarMenuRight icon={'cog'} onPress={() => showModalSettingsConfig()}/>
+                    }} 
+                    />
+
+                <Stack.Screen 
+                    name="ViewNote" 
+                    component={ViewNotePage} 
+                    options={{
+                        headerTitle: 'Nota',
+                        headerRight: () => <ToolbarMenuRight icon={'dots-vertical-circle-outline'} onPress={() => showModalEditNotes()}/>
+                    }} 
+                    />
+
             </Stack.Navigator>
         </NavigationContainer>
     )
 }
 
-export default RootNavigator;
+ RootNavigator;

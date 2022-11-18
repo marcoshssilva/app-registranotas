@@ -12,7 +12,7 @@ import {FilteredFolderNotesScreen} from "./screens/FilteredFolderNotesScreen";
 import {ToolbarMenuRight, ToolbarMenuRightStyle} from "../../components/toolbar-menu-right";
 import {GlobalStyles} from "../../GlobalStyle";
 import {showModalCreateFolder} from "../../components/modal-create-folder";
-import {showModalCreateNotes} from "../../components/modal-create-notes";
+import { navigate } from '../../navigation';
 
 const Drawer = createDrawerNavigator();
 
@@ -29,7 +29,7 @@ const Homepage = ({navigation, route}) => {
                     headerRight: (props) => <View style={GlobalStyles.rowItensField} {...props}>
                         <ToolbarMenuRight
                             icon={'notebook-plus'}
-                            onPress={() => showModalCreateNotes()} />
+                            onPress={() => navigate('ViewNote', {})} />
 
                         <ToolbarMenuRight
                             style={ToolbarMenuRightStyle.marginAlignTopToolbar}

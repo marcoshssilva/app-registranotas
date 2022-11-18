@@ -4,8 +4,10 @@ import { Text, List, Divider  } from "react-native-paper"
 
 import { GlobalStyles } from "../../GlobalStyle";
 import {showModalCreateFolder} from "../modal-create-folder";
-import {showModalCreateNotes} from "../modal-create-notes";
+import {showModalCreateNotes} from "../modal-edit-notes";
 import {getAllFolders} from "../../services/firestore/folders-data";
+
+import { navigate } from "../../navigation";
 
 export const ToolbarDrawableMenu = ({ navigation }) => {
     const [folders, setFolders] = React.useState([])
@@ -15,7 +17,8 @@ export const ToolbarDrawableMenu = ({ navigation }) => {
     }, [])
 
     const openCreateQuickNoteModal = () => {
-        showModalCreateNotes()
+        //showModalCreateNotes()
+        navigate('ViewNote', {})
         navigation.closeDrawer();
     }
 

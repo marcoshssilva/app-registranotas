@@ -5,20 +5,20 @@ import {GlobalStyles} from "../../GlobalStyle";
 import {EventRegister} from "react-native-event-listeners";
 import {ModalCreateFolderStyles} from "../modal-create-folder";
 
-const CreateNotesIntern = () => {
+const EditNotesIntern = () => {
     return <SafeAreaView>
         <Text>Example Modal.  Click outside this area to dismiss.</Text>
     </SafeAreaView>
 }
 
-export class ModalCreateNotes extends Component {
+export class ModalEditNotes extends Component {
     constructor(props) {
         super(props);
         this.state = { visible: false }
     }
 
     componentDidMount() {
-        this.listener = EventRegister.addEventListener('onMustShowModelCreateNotes', (mustShow) => {
+        this.listener = EventRegister.addEventListener('onMustShowModelEditNotes', (mustShow) => {
             this.setState({ visible: mustShow })
         })
     }
@@ -30,16 +30,16 @@ export class ModalCreateNotes extends Component {
     render() {
         return <Portal>
             <Modal visible={this.state.visible} onDismiss={() => this.setState({visible: false})} contentContainerStyle={ModalCreateFolderStyles.modalDefault}>
-                <CreateNotesIntern />
+                <EditNotesIntern />
             </Modal>
         </Portal>
     }
 }
 
-export function showModalCreateNotes() {
-    EventRegister.emit("onMustShowModelCreateNotes", true)
+export function showModalEditNotes() {
+    EventRegister.emit("onMustShowModelEditNotes", true)
 }
 
-export const ModalCreateNotesStyles = StyleSheet.create({
+export const ModalCreateEditStyles = StyleSheet.create({
     ...GlobalStyles,
 })
