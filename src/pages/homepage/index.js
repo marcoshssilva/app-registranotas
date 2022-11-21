@@ -42,18 +42,19 @@ const Homepage = ({navigation, route}) => {
             <Drawer.Screen
                 name="AllNotes"
                 component={AllNotesScreen}
-                options={{title: 'Todas as notas'}}
+                options={{ title: 'Todas as notas' }}
                 />
 
             <Drawer.Screen
                 name="FavoriteNotes"
                 component={FavoriteNotesScreen}
-                options={{title: 'Favoritos'}}
+                options={{ title: 'Favoritos' }}
                 />
 
             <Drawer.Screen
                 name="Filtered"
                 component={FilteredFolderNotesScreen}
+                options={{ title: 'Pasta Personalizada' }}
                 />
         </Drawer.Navigator>
     )

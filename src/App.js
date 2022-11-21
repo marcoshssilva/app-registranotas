@@ -6,7 +6,7 @@ import { StatusBar, BackHandler } from 'react-native';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import {ModalCreateFolder} from "./components/modal-create-folder";
 import {ModalSettingsConfig} from "./components/modal-settings-config";
-import {ModalCreateNotes} from "./components/modal-create-notes";
+import {ModalEditNotes} from "./components/modal-edit-notes";
 import * as LocalStorage from "./services/local-storage";
 
 GoogleSignin.configure({
@@ -25,7 +25,7 @@ const App = () => (
         <RootNavigator />
         <ModalCreateFolder />
         <ModalSettingsConfig />
-        <ModalCreateNotes />
+        <ModalEditNotes />
     </PaperProvider>
 );
 export default App;

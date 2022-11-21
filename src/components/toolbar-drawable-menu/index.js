@@ -28,7 +28,7 @@ export const ToolbarDrawableMenu = ({ navigation }) => {
     }
 
     const renderCustomItems = ({ item }) => {
-        return <ItemCustomFolder description={item.description} icon={item.icon} name={item.name} />
+        return <ItemCustomFolder description={item.description} icon={item.icon} name={item.name} item={item} />
     }
 
     return (<ScrollView>
@@ -92,9 +92,10 @@ export const ToolbarDrawableMenu = ({ navigation }) => {
     </ScrollView>)
 }
 
-export const ItemCustomFolder = ({ name, icon, description }) => {
+export const ItemCustomFolder = ({ name, icon, description, item }) => {
     return <List.Item title={name}
                       left={props => <List.Icon {...props} icon={icon} />}
+                      onPress={() => navigate('Filtered', { folder: item })}
                       description={description} />
 }
 

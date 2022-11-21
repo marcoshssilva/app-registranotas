@@ -42,5 +42,5 @@ export const GlobalStyles = StyleSheet.create({
         padding: 20,
         margin: 20,
         borderRadius: 32
-    }
+    },
 });

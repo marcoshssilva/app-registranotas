@@ -28,6 +28,13 @@ export const ViewNotePageStyles = StyleSheet.create({
         margin: 32,
         right: 0,
         bottom: 0,
-        transform: [{translateY: -72 }]
-    }
+        transform: [{translateY: -105 }]
+    },
+    fabOpenModalEditNote: {
+        position: 'absolute',
+        margin: 32,
+        right: 0,
+        bottom: 0,
+        transform: [{translateY: -172 }]
+    },
 })

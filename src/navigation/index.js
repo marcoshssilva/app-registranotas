@@ -10,7 +10,6 @@ import ForgotPasswordPage from "../pages/forgot-password";
 import { ToolbarMenuRight } from "../components/toolbar-menu-right";
 import {showModalSettingsConfig} from "../components/modal-settings-config";
 import { ViewNotePage } from "../pages/view-note";
-import { showModalEditNotes } from "../components/modal-edit-notes";
 
 export const navigationRef = createNavigationContainerRef();
 
@@ -66,10 +65,7 @@ export default RootNavigator = () => {
                 <Stack.Screen 
                     name="ViewNote" 
                     component={ViewNotePage} 
-                    options={{
-                        headerTitle: 'Nota',
-                        headerRight: () => <ToolbarMenuRight icon={'dots-vertical-circle-outline'} onPress={() => showModalEditNotes()}/>
-                    }} 
+                    options={{ headerTitle: 'Nota' }}
                     />
 
             </Stack.Navigator>
