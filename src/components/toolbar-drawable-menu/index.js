@@ -1,11 +1,37 @@
 import React from "react";
-import { StyleSheet, SafeAreaView } from "react-native";
+import {StyleSheet, FlatList, ScrollView} from "react-native";
 import { Text, List, Divider  } from "react-native-paper"
 
 import { GlobalStyles } from "../../GlobalStyle";
+import {showModalCreateFolder} from "../modal-create-folder";
+import {showModalCreateNotes} from "../modal-edit-notes";
+import {getAllFolders} from "../../services/firestore/folders-data";
 
-export const ToolbarDrawableMenu = ({ navigation, route, options }) => {
-    return (<SafeAreaView>
+import { navigate } from "../../navigation";
+
+export const ToolbarDrawableMenu = ({ navigation }) => {
+    const [folders, setFolders] = React.useState([])
+
+    React.useEffect(() => {
+        getAllFolders().then(data => setFolders(data))
+    }, [])
+
+    const openCreateQuickNoteModal = () => {
+        //showModalCreateNotes()
+        navigate('ViewNote', {})
+        navigation.closeDrawer();
+    }
+
+    const openCreateFolderModal = () => {
+        showModalCreateFolder()
+        navigation.closeDrawer();
+    }
+
+    const renderCustomItems = ({ item }) => {
+        return <ItemCustomFolder description={item.description} icon={item.icon} name={item.name} item={item} />
+    }
+
+    return (<ScrollView>
         <Text
             variant="headlineMedium"
             style={ToolbarDrawableMenuStyle.title}>
@@ -40,6 +66,10 @@ export const ToolbarDrawableMenu = ({ navigation, route, options }) => {
             Meus Personalizados
         </Text>
 
+        <FlatList data={folders}
+                  renderItem={renderCustomItems}
+                  keyExtractor={(item) => item.key} />
+
         <Text
             variant="titleMedium"
             style={ToolbarDrawableMenuStyle.title}>
@@ -50,14 +80,23 @@ export const ToolbarDrawableMenu = ({ navigation, route, options }) => {
             title="Criar pasta"
             description="Adiciona uma nova pasta personalizada"
             left={props => <List.Icon {...props} icon="folder-plus-outline" />}
+            onPress={openCreateFolderModal}
         />
 
         <List.Item
             title="Nota rápida"
             description="Cria uma nota simplificada"
             left={props => <List.Icon {...props} icon="notebook-plus" />}
+            onPress={openCreateQuickNoteModal}
         />
-    </SafeAreaView>)
+    </ScrollView>)
+}
+
+export const ItemCustomFolder = ({ name, icon, description, item }) => {
+    return <List.Item title={name}
+                      left={props => <List.Icon {...props} icon={icon} />}
+                      onPress={() => navigate('Filtered', { folder: item })}
+                      description={description} />
 }
 
 export const ToolbarDrawableMenuStyle = StyleSheet.create({

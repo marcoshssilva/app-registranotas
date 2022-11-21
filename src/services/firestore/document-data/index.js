@@ -1,14 +1,12 @@
 import firestore from '@react-native-firebase/firestore';
+import auth from "@react-native-firebase/auth";
+import * as LocalStorage from '../../local-storage';
 
 /**
  * @type {string} Refered collection to users in Firebase Firestore
  */
 export const DOCUMENTDATA_COLLECTION = 'users_notes';
 
-/**
- * @param userEmail -> email from auth user
- * @returns {FirebaseFirestoreTypes.DocumentReference<FirebaseFirestoreTypes.DocumentData>}
- */
 export const getDocumentData = (userEmail) => {
     return firestore().collection(DOCUMENTDATA_COLLECTION)
         .doc(userEmail)
@@ -31,4 +29,9 @@ export const createDocumentData = (userEmail) => {
             },
             createdAt: firestore.FieldValue.serverTimestamp(),
         })
+}
+
+export const signInUserSystem = async () => {
+    await auth().signOut()
+    await LocalStorage.initializeConfig();
 }
