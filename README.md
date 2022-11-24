@@ -2,6 +2,11 @@
 App feito com [react-native](https://reactnative.dev/) para 
 projeto de matéria Programação para Dispositivos Móveis em Android.
 
+## Baixando o APK
+
+Se você deseja baixar este APK, faça o download por este link:
+[RegistraNotas 1.0.0-SNAPSHOT](https://github.com/marcoshssilva/app-registranotas-react-native/releases/tag/1.0.0-SNAPSHOT)
+
 ## Instalação e geração do APK
 
 Se você rodar compilar este projeto e executa-lo manualmente pelo seu IDE ou instalar uma release.
